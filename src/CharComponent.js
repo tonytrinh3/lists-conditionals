@@ -8,5 +8,13 @@ const style = {
     border: "1px solid black"
 };
 
+const CharComponent = (props) => {
 
-export default style 
+    return (
+        <div>
+           
+            <p style = {style}>{props.letter}</p>
+        </div>
+    )
+}
+export default CharComponent 

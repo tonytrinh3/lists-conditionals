@@ -6,19 +6,33 @@ import CharComponent from "./CharComponent.js";
 class App extends Component {
 
   state = {
-    word: "efwefwefwef"
-  }
+    word: ""
+  };
+
+
+
   somethingChangedHandler = (event) => {
     this.setState(
       {
         word: event.target.value
       }
-
     )
   }
   
-  
   render() {
+ 
+    let person = null;
+    for ( let i=0; i<this.state.word.length; i++){
+      person = (
+        <div>
+        {this.state.word.split("")[i]}
+        </div>
+      )
+
+
+    }
+
+
     return (
       <div className="App">
         <ol>
@@ -31,9 +45,11 @@ class App extends Component {
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
 
-         <input type = "text" onChange = {this.somethingChangedHandler}/> how long is the text below 
+         <input type = "text" onChange = {this.somethingChangedHandler} value = {this.state}/> how long is the text below 
         <p>{this.state.word}</p> 
          <ValidationComponent word = {this.state.word}/>
+         <CharComponent letter = {this.state.word.split("")[1]}/>
+         {person}
          
       </div>
     );
