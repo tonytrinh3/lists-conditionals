@@ -18,21 +18,29 @@ class App extends Component {
       }
     )
   }
+
+
+  deleteCharHandler = (index) =>{
+    const text = this.state.word.split("");
+    text.splice(index,1); //removes one char from array
+    const updatedText = text.join(''); //convert word of character into text 
+    this.setState({word: updatedText});
+  }
+  
   
   render() {
- 
-    let person = null;
-    for ( let i=0; i<this.state.word.length; i++){
-      person = (
-        <div>
-        {this.state.word.split("")[i]}
-        </div>
+
+    //map every element in the array into a new element
+    const charList = this.state.word.split('').map( (ch, index) => {
+      return (
+      <CharComponent 
+      character = {ch}
+      key = {index}
+      clicked = {() => this.deleteCharHandler(index)}
+       />
       )
-
-
-    }
-
-
+        });
+    
     return (
       <div className="App">
         <ol>
@@ -45,11 +53,10 @@ class App extends Component {
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
 
-         <input type = "text" onChange = {this.somethingChangedHandler} value = {this.state}/> how long is the text below 
+         <input type = "text" onChange = {this.somethingChangedHandler} value = {this.state.word}/> how long is the text below 
         <p>{this.state.word}</p> 
          <ValidationComponent word = {this.state.word}/>
-         <CharComponent letter = {this.state.word.split("")[1]}/>
-         {person}
+         {charList}
          
       </div>
     );
